@@ -1,0 +1,6 @@
+var,PatientBaselineCMBDs,PatientDemographicRisk,SelfPay,DocOrderSet,Outcomes
+PatientBaselineCMBDs,0,0,0,0,0
+PatientDemographicRisk,0,0,0,0,0
+SelfPay,-0.03370387754534929,-0.11620495257237694,0,0,0
+DocOrderSet,-0.2685911518231377,0.04296774988802479,0.03538374960182961,0,0
+Outcomes,0,0,0,0.07487307626904204,0
