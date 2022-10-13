@@ -1,0 +1,94 @@
+---
+title: drug_matching
+author: em
+date: '2022-04-09'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+joined_pivoted <- readRDS("/Users/emdmcglone/Desktop/diabeats/joined_pivoted.RDS")
+costs_pivoted <- readRDS("/Users/emdmcglone/Desktop/diabeats/costs_pivoted.RDS")
+
+# join by drug in joined_pivoted
+# by brand_name, generic_name in cost_pivoted
+```
+  
+
+```{r}
+metformin <- expand.grid(drug = "metformin", brand_name = c("metformin hcl"))
+repaglinide               <- expand.grid(drug = "repaglinide", brand_name = c("repaglinide"))
+nateglinide                <- expand.grid(drug = "nateglinide", brand_name = c("nateglinide"))
+chlorpropamide             <- expand.grid(drug = "chlorpropamide", brand_name = c("chloropropamide"))
+glimepiride                <- expand.grid(drug = "glimepiride", brand_name = c("glimepiride"))
+acetohexamide             <- expand.grid(drug = "acetohexamide", brand_name = c("acetohexamide"))
+glipizide                  <- expand.grid(drug = "glipizide", brand_name = c("glipizide"))
+glyburide                  <- expand.grid(drug = "glyburide", brand_name = c("glyburide"))
+tolbutamide                <- expand.grid(drug = "tolbutamide", brand_name = c("tolbutamide"))
+pioglitazone              <- expand.grid(drug = "pioglitazone", brand_name = c("pioglitazone hcl"))
+rosiglitazone              <- expand.grid(drug = "rosiglitazone", brand_name = c("Avandia"))
+acarbose                   <- expand.grid(drug = "acarbose", brand_name = c("acarbose"))
+miglitol                   <- expand.grid(drug = "miglitol", brand_name = c("miglitol"))
+troglitazone              <- expand.grid(drug = "troglitazone", brand_name = c("troglitazone"))
+tolazamide                 <- expand.grid(drug = "tolazamide", brand_name = c("tolazamide"))
+examide                    <- expand.grid(drug = "examide", brand_name = c("examide"))
+citoglipton                <- expand.grid(drug = "citoglipton", brand_name = c("citoglipton"))
+glyburide_metformin <- expand.grid(drug = "glyburide_metformin", brand_name = c("glyburide_metformin"))
+glipizide_metformin	<- expand.grid(drug = "glipizide_metformin", brand_name = c("glipizide_metformin"))			
+glimepiride_pioglitazone	<- expand.grid(drug = "glimepiride_pioglitazone", brand_name = c("glimepiride_pioglitazone"))			
+metformin_rosiglitazone	<- expand.grid(drug = "metformin_rosiglitazone", brand_name = c("metformin_rosiglitazone"))			
+metformin_pioglitazone <- expand.grid(drug = "metformin_pioglitazone", brand_name = c("metformin_pioglitazone"))
+insulin                   <- expand.grid(drug = "insulin", brand_name = c("insulin syringe"))
+
+drugs_complete <- rbind(metformin,repaglinide,              
+nateglinide,
+chlorpropamide,
+glimepiride,
+acetohexamide,
+glipizide,
+glyburide,
+tolbutamide,
+pioglitazone,
+rosiglitazone,
+acarbose,
+miglitol,
+troglitazone,
+tolazamide,
+examide,
+citoglipton,
+glyburide_metformin,
+glipizide_metformin,		
+glimepiride_pioglitazone,		
+metformin_rosiglitazone,
+metformin_pioglitazone,
+insulin)
+```
+
+
+```{r}
+drugs_complete$drug <- as.character(drugs_complete$drug)
+drugs_complete$brand_name <- as.character(drugs_complete$brand_name)
+
+drugs_complete$drug <- tolower(drugs_complete$drug)
+drugs_complete$brand_name <- tolower(drugs_complete$brand_name)
+
+joined_pivoted$drug <- tolower(joined_pivoted$drug)
+costs_pivoted$brand_name <- tolower(costs_pivoted$brand_name)
+costs_pivoted$generic_name <- tolower(costs_pivoted$generic_name)
+```
+
+```{r}
+x1 <- left_join(joined_pivoted, drugs_complete, by = c("drug"))
+x1 %>% select(drug, brand_name) %>% head(100)
+```
+
+```{r}
+costs_pivoted2 <- costs_pivoted %>% filter(brand_name %in% x1$brand_name)
+
+x2 <- left_join(x1, costs_pivoted2, by = c("brand_name"))
+x2 %>% select(drug, brand_name, generic_name) %>% head(50)
+```
