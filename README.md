@@ -3,9 +3,9 @@
 
 Submission in the Citadel Datathon. Code temporarily dumped without explanation, paper [available](https://github.com/b-hemanth/diabetes-pay-pls-sem/blob/main/pls-sem-paper.pdf).
 
-# DATA NOTES
+# Data notes
 
-- Files
+- Files are in `./data/`
 	- data <- `diabetic_data_initial.csv`
 	- discharge_ids <- `discharge.csv`
 	- admission_type_ids <- `admission_type.csv`
