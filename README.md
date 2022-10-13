@@ -1,6 +1,7 @@
 # PLS-SEM Model of Self-Pay Influencing Diabetic Treatment and Outcomes
+## with Eli Garcia, Ben Hoffner-Brodsky, and Em McGlone
 
-Submission in the Citadel Datathon.
+Submission in the Citadel Datathon. Code temporarily dumped without explanation, paper [available](https://github.com/b-hemanth/diabetes-pay-pls-sem/blob/main/pls-sem-paper.pdf).
 
 # DATA NOTES
 
